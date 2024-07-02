@@ -1,5 +1,5 @@
-# This file needs to be an executable shell script
 #!/bin/bash
+# This file needs to be an executable shell script
 
 # write the outputs of the script to a log file
 exec > >(tee /var/log/startup_script.log) 2>&1
@@ -8,7 +8,7 @@ exec > >(tee /var/log/startup_script.log) 2>&1
 token=$(<token.txt)
 
 # This script is used to start the NordVPN service and connect to a specific server
-nordvpn login --token $token
+nordvpn login --token "$token"
 
 nordvpn set killswitch 1
 nordvpn set analytics 0
