@@ -1,8 +1,13 @@
 #!/bin/bash
 # This file needs to be an executable shell script
+# Start the NordVPN service
+/etc/init.d/nordvpn start
+
+# Add a delay to ensure the service starts properly
+sleep 5
 
 # write the outputs of the script to a log file
-exec > >(tee /var/log/startup_script.log) 2>&1
+# exec > >(tee /var/log/startup_script.log) 2>&1
 
 # read nordvpn token from txt
 token=$(</root/token.txt)
