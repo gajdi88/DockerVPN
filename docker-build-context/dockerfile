@@ -1,0 +1,26 @@
+# Build
+FROM ubuntu:22.04 AS base
+
+
+# Install basic utilities
+RUN apt update && \
+    apt install -y curl wget unzip && \
+    apt clean
+
+
+RUN curl -sSL https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb -o nordvpn.deb && \
+    apt install -y ./nordvpn.deb && \
+    apt update && \
+    apt install -y nordvpn
+
+# Copy your custom scripts into the Docker image
+# Replace `path/to/your/scripts` with the actual path to your scripts
+COPY startup_script.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/startup_script.sh
+
+# Expose necessary ports (adjust as needed)
+# EXPOSE 8080
+
+# Set the entrypoint to your custom script or a startup script
+ENTRYPOINT ["startup_script.sh"]
+
