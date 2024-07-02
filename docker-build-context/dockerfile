@@ -4,7 +4,7 @@ FROM ubuntu:22.04 AS base
 
 # Install basic utilities
 RUN apt update && \
-    apt install -y curl wget unzip && \
+    apt install -y curl wget unzip iputils-ping && \
     apt clean
 
 
@@ -12,6 +12,13 @@ RUN curl -sSL https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-rele
     apt install -y ./nordvpn.deb && \
     apt update && \
     apt install -y nordvpn
+
+# Expose necessary ports for NordVPN
+EXPOSE 1194/udp
+EXPOSE 443/tcp
+EXPOSE 500/udp
+EXPOSE 4500/udp
+EXPOSE 51820/udp
 
 # Copy your custom scripts into the Docker image
 # Replace `path/to/your/scripts` with the actual path to your scripts
