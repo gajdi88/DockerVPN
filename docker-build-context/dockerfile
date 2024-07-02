@@ -16,11 +16,13 @@ RUN curl -sSL https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-rele
 # Copy your custom scripts into the Docker image
 # Replace `path/to/your/scripts` with the actual path to your scripts
 COPY startup_script.sh /usr/local/bin/
+COPY token.txt /root/
+
 RUN chmod +x /usr/local/bin/startup_script.sh
 
 # Expose necessary ports (adjust as needed)
 # EXPOSE 8080
 
 # Set the entrypoint to your custom script or a startup script
-ENTRYPOINT ["startup_script.sh"]
+ENTRYPOINT ["/usr/local/bin/startup_script.sh"]
 

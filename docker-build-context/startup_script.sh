@@ -5,7 +5,7 @@
 exec > >(tee /var/log/startup_script.log) 2>&1
 
 # read nordvpn token from txt
-token=$(<token.txt)
+token=$(</root/token.txt)
 
 # This script is used to start the NordVPN service and connect to a specific server
 nordvpn login --token "$token"
